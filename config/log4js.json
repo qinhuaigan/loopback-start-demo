@@ -1,0 +1,18 @@
+{
+    "appenders": {
+      "errorFile": {
+        "type": "dateFile",
+        "filename": "log/errors",
+        "pattern": "yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      },
+      "errors": {
+        "type": "logLevelFilter",
+        "level": "ERROR",
+        "appender": "errorFile"
+      }
+    },
+    "categories": {
+      "default": { "appenders": [ "errors" ], "level": "DEBUG" }
+    }
+  }

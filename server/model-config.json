@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "../node_modules/loopback-objectid-mixin",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "startDemo"
+  },
+  "AccessToken": {
+    "dataSource": "startDemo",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "startDemo",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "startDemo",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "startDemo",
+    "public": false
+  },
+  "CoffeeShop": {
+    "dataSource": "startDemo",
+    "public": true
+  }
+}
