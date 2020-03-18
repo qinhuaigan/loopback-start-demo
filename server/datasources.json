@@ -13,5 +13,12 @@
     "user": "",
     "useNewUrlParser": true,
     "connector": "mongodb"
+  },
+  "File": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "File",
+    "name": "File",
+    "connector": "loopback-component-storage-mongo"
   }
 }

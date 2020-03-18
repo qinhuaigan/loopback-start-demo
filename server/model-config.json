@@ -39,5 +39,13 @@
   "CoffeeShop": {
     "dataSource": "startDemo",
     "public": true
+  },
+  "Container": {
+    "dataSource": "File",
+    "public": true
+  },
+  "storage": {
+    "dataSource": "startDemo",
+    "public": true
   }
 }
