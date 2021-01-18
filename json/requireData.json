@@ -1,0 +1,43 @@
+{
+  "description": "在这里配置接口必填字段的验证 // 例如: Union（模块名称）, insertUnion（该模块下的接口名称）, source(参数来源 body, fromdata 等)，data（前端参数列表） name（接口的 'name' 字段, 'required' 是否必填, 'description' 参数名称）",
+  "Union": {
+    "insertUnion": {
+      "data": {
+        "name": {
+          "required": true,
+          "description": "联盟名称"
+        }
+      }
+    }
+  },
+  "Carousel": {
+    "updateCarousel": {
+      "source": "formdata",
+      "data": {
+        "id": {
+          "required": true,
+          "description": "id"
+        }
+      }
+    }
+  },
+  "Theme": {
+    "removeTheme": {
+      "source": "body",
+      "data": {
+        "id": {
+          "required": true,
+          "description": "id"
+        }
+      }
+    },
+    "updateRecommend": {
+      "data": {
+        "id": {
+          "required": true,
+          "description": "id"
+        }
+      }
+    }
+  }
+}
