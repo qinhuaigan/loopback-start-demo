@@ -8,23 +8,22 @@ const {
   formatFormData
 } = require('../service/service.js')
 
-async function checkRequireData(context) { // 检验必填字段
+async function checkRequireData (context) { // 检验必填字段
   const checkData = requireData[context.modelName] ? requireData[context.modelName][context.method] : null
   let formData = null
+  let source = checkData ? checkData.source : null
+  const form = new formidable.IncomingForm(); // 处理 form 表单数据
+  if (source === 'formdata') {
+    formData = await new Promise((resolve) => { // formdata 中的参数
+      form.parse(context.remotingContext.req, (err, fields, files) => {
+        resolve({
+          fields,
+          files
+        })
+      });
+    })
+  }
   if (checkData) {
-    const source = checkData.source // 参数存放位置
-    const form = new formidable.IncomingForm(); // 处理 form 表单数据
-    formData = {}
-    if (context.remotingContext.req.headers['content-type'].indexOf('multipart/form-data') >= 0) {
-      formData = await new Promise((resolve) => { // formdata 中的参数
-        form.parse(context.remotingContext.req, (err, fields, files) => {
-          resolve({
-            fields,
-            files
-          })
-        });
-      })
-    }
     // 存在需要 "必填字段" 约束，所以，需要验证
     const keys = Object.keys(checkData)
     const bodyData = context.remotingContext.req.body // body 中的参数
@@ -56,7 +55,7 @@ async function checkRequireData(context) { // 检验必填字段
         msg,
         data,
         source,
-        file: formData.files.file
+        file: formData && formData.files ? formData.files.file : null
       }
     } else {
       return {
@@ -64,8 +63,15 @@ async function checkRequireData(context) { // 检验必填字段
         msg,
         data,
         source,
-        file: formData.files.file
+        file: formData && formData.files ? formData.files.file : null
       }
+    }
+  } else {
+    return {
+      result: true,
+      data: formData ? formData.fields : [],
+      source,
+      file: formData && formData.files ? formData.files.file : null
     }
   }
 }
